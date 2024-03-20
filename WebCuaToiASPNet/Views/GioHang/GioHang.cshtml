@@ -1,0 +1,128 @@
+﻿@using WebCuaToiASPNet.Models;
+@model List<GioHang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section timkiemSP {
+    <div class="search_bar">
+        <form action="~/Home/TrangSanPham" method="get">
+            <input placeholder="Tìm kiếm sản phẩm đi cu..." type="text" name="timKiemSP">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+}
+
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="index.html">home</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>Shopping Cart</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+@if (Model.Count == 0 || Model == null)
+{
+    <h1 style="color: red">Giỏ hàng rỗng</h1>
+}
+else
+{
+
+    <!--shopping cart area start -->
+    <div class="shopping_cart_area">
+        <form action="#">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table_desc">
+                        <div class="cart_page table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="product_remove">Options</th>
+                                        <th class="product_thumb">Image</th>
+                                        <th class="product_name">Product</th>
+                                        <th class="product-price">Size</th>
+                                        <th class="product-price">Price</th>
+                                        <th class="product_quantity">Quantity</th>
+                                        <th class="product_total">Total</th>
+                                    </tr>
+                                </thead>
+                                @foreach(var item in Model) 
+                                {
+                                <tbody>
+
+                                    <tr>
+                                        <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                        <td class="product_thumb"><a href="#"><img src="@item.HinhAnh" alt=""></a></td>
+                                        <td class="product_name"><a href="#">@item.TenSP</a></td>
+                                        <td class="product-price">@item.Size</td>
+                                        <td class="product-price">@item.DonGia.ToString("#,##") VNĐ</td>
+                                        <td class="product_quantity"><input min="0" max="100" value="@item.SoLuong" type="number"></td>
+                                        <td class="product_total">@item.ThanhTien.ToString("#,##") VNĐ</td>
+                                     </tr>
+
+                                </tbody>
+                                }
+                            </table>
+                        </div>
+                        <div class="cart_submit">
+                            <button type="submit">update cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--coupon code area start-->
+            <div class="coupon_area">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="coupon_code">
+                            <h3>Coupon</h3>
+                            <div class="coupon_inner">
+                                <p>Enter your coupon code if you have one.</p>
+                                <input placeholder="Coupon code" type="text">
+                                <button type="submit">Apply coupon</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="coupon_code">
+                            <h3>Cart Totals</h3>
+                            <div class="coupon_inner">
+                                <div class="cart_subtotal">
+                                    <p>Subtotal</p>
+                                    <p class="cart_amount">£215.00</p>
+                                </div>
+                                <div class="cart_subtotal ">
+                                    <p>Shipping</p>
+                                    <p class="cart_amount"><span>Flat Rate:</span> £255.00</p>
+                                </div>
+                                <a href="#">Calculate shipping</a>
+
+                                <div class="cart_subtotal">
+                                    <p>Total</p>
+                                    <p class="cart_amount">@ViewBag.TinhTongTien VNĐ</p>
+                                </div>
+                                <div class="checkout_btn">
+                                    <a href="#">Proceed to Checkout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--coupon code area end-->
+        </form>
+    </div>
+    <!--shopping cart area end -->
+
+} 

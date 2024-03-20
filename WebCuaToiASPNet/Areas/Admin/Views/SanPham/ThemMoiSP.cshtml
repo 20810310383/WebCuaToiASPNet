@@ -1,0 +1,196 @@
+﻿@model WebCuaToiASPNet.Models.SanPham
+
+@{
+    ViewBag.Title = "Thêm mới sản phẩm";
+    ViewBag.active = 1;
+    Layout = "~/Areas/Admin/Views/Shared/_pageAdmin.cshtml";
+    WebCuaToiASPNet.Models.WebCuaTuASPDotNetEntities db = new WebCuaToiASPNet.Models.WebCuaTuASPDotNetEntities();
+}
+
+<div class="container-fluid ">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Thêm mới sản phẩm</h1>
+    </div>
+
+    <div class="p-5 bg-white rounded shadow mb-5">
+        @using (Html.BeginForm("ThemMoiSP", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label class="control-label col-md-2">Tên sản phẩm <span style="color:red;">*</span></label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TenSP, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.TenSP, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Giá bán <span style="color:red;">*</span></label>
+                    <div class="col-md-10">
+                        <input type="number" name="GiaBan" required min="10000" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.GiaBan, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Giá cũ <span style="color:red;">*</span></label>
+                    <div class="col-md-10">
+                        <input type="number" name="GiaCu" required min="10000" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.GiaCu, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">New / Hot <span style="color:red;">*</span></label>
+                    <div class="col-md-10">
+                        <select class="form-control" id="NewHot" name="New_Hot">
+                            <option selected value="New">New</option>
+                            <option value="Hot">Hot</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.New_Hot, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Mới / Nổi Bật <span style="color:red;">*</span></label>
+                    <div class="col-md-10">
+                        <select class="form-control" id="SpMoi_NoiBat" name="SpMoi_NoiBat">
+                            <option selected value="Moi">Mới</option>
+                            <option value="NoiBat">Nổi Bật</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.SpMoi_NoiBat, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Số lượng tồn</label>
+                    <div class="col-md-10">
+                        <input type="number" name="SoLuongTon" min="1" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.SoLuongTon, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Số lượng bán </label>
+                    <div class="col-md-10">
+                        <input type="number" name="SoLuongBan" min="1" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.SoLuongBan, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Số lượng đánh giá </label>
+                    <div class="col-md-10">
+                        <input type="number" name="SoLuotDanhGia" min="1" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.SoLuotDanhGia, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Loại sản phẩm <span style="color:red;">*</span></label>
+                    <div class="col-md-10">
+                        <select name="IdLoaiSP" class="form-control">
+                            @foreach (var item in db.TheLoaiSPs.ToList())
+                            {
+                                <option value="@item.ID">@item.TenLoaiSP</option>
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(model => model.IdLoaiSP, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Hình ảnh 1 <span style="color:red;">*</span></label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Image1, new { htmlAttributes = new { @class = "form-control" } })
+                        <a  class="btn btn-primary" onclick="BrowseServer()">Thêm Hình Ảnh 1</a>
+                        @Html.ValidationMessageFor(model => model.Image1, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Hình ảnh 2 <span style="color:red;">*</span></label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Image2, new { htmlAttributes = new { @class = "form-control" } })
+                        <a  class="btn btn-primary" onclick="BrowseServer2()">Thêm Hình Ảnh 2</a>
+                        @Html.ValidationMessageFor(model => model.Image2, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Hình ảnh 3 <span style="color:red;">*</span></label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Image3, new { htmlAttributes = new { @class = "form-control" } })
+                        <a  class="btn btn-primary" onclick="BrowseServer3()">Thêm Hình Ảnh 3</a>
+                        @Html.ValidationMessageFor(model => model.Image3, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Mô tả</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" name="Mota" id="txtNoiDung"></textarea>
+                        @Html.ValidationMessageFor(model => model.Mota, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <a href="~/Admin/SanPham/DanhSach" class="btn btn-dark">Back to list</a>
+                        <input type="submit" value="Thêm mới sản phẩm" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+
+</div>
+
+@section scriptcss {
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+}
+
+@section doanJS {
+    <script>
+        // xử lý textarea theo form word
+        CKEDITOR.replace('txtNoiDung')
+
+        // xử lý upload ảnh
+        function BrowseServer() {
+            var finder = new CKFinder();
+            finder.selectActionFunction = GanUrlChoTruongHinhAnh;
+            finder.popup();
+        }
+        function BrowseServer2() {
+            var finder = new CKFinder();
+            finder.selectActionFunction = GanUrlChoTruongHinhAnh2;
+            finder.popup();
+        }
+        function BrowseServer3() {
+            var finder = new CKFinder();
+            finder.selectActionFunction = GanUrlChoTruongHinhAnh3;
+            finder.popup();
+        }
+
+        function GanUrlChoTruongHinhAnh(url) {
+            $("input[name=Image1]").val(url);
+        }
+        function GanUrlChoTruongHinhAnh2(url) {
+            $("input[name=Image2]").val(url);
+        }
+        function GanUrlChoTruongHinhAnh3(url) {
+            $("input[name=Image3]").val(url);
+        }
+    </script>
+}

@@ -1,0 +1,263 @@
+﻿@using WebCuaToiASPNet.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<SanPham>
+
+@{
+    ViewBag.Title = "TrangSanPhamPhanLoai";
+    ViewBag.active = 2;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebCuaToiASPNet.Models.WebCuaTuASPDotNetEntities db = new WebCuaToiASPNet.Models.WebCuaTuASPDotNetEntities();
+
+}
+
+@section timkiemSP {
+    <div class="search_bar">
+        <form action="~/Home/TrangSanPham" method="get">
+            <input placeholder="Tìm kiếm sản phẩm đi cu..." type="text" name="timKiemSP" >
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+}
+
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="index.html">home</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>shop</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!--pos home section-->
+<div class=" pos_home_section">
+    <div class="row pos_home">
+        <div class="col-lg-3 col-md-12">
+            <!--layere categorie"-->
+            <div class="sidebar_widget shop_c">
+                <div class="categorie__titile">
+                    <h4 style="font-family: Arial">Loại sản phẩm</h4>
+                </div>
+                <div class="layere_categorie">
+                    <ul>
+                        @{
+                            foreach (var item in db.TheLoaiSPs.ToList())
+                            {
+                                int soLuongSanPham = db.SanPhams.Count(s => s.IdLoaiSP == item.ID);
+                                <li>
+                                    <a href="~/Home/TrangPhanLoaiSPTheoLoai?idPL=@item.ID" style="font-size: 16px;">
+                                        <label for="acces">
+                                            <input type="hidden" name="idPL" value="@item.ID" />
+                                            <span style="font-size: 16px;">@item.TenLoaiSP</span>
+                                            <span style="font-size: 16px;">(@soLuongSanPham)</span>
+                                        </label>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <!--layere categorie end-->
+            
+            <!--price slider start-->
+            @*<div class="sidebar_widget price">
+                <h2>Price</h2>
+                <div class="ca_search_filters">
+
+                    <input type="text" name="text" id="amount">
+                    <div id="slider-range"></div>
+                </div>
+            </div>*@
+            <!--price slider end-->
+            
+            <!--popular tags area-->
+            <div class="sidebar_widget tags  mb-30">
+                <div class="block_title">
+                    <h3>popular tags</h3>
+                </div>
+                <div class="block_tags">
+                    <a href="#">ipod</a>
+                    <a href="#">sam sung</a>
+                    <a href="#">apple</a>
+                    <a href="#">iphone 5s</a>
+                    <a href="#">superdrive</a>
+                    <a href="#">shuffle</a>
+                    <a href="#">nano</a>
+                    <a href="#">iphone 4s</a>
+                    <a href="#">canon</a>
+                </div>
+            </div>
+            <!--popular tags end-->
+            <!--newsletter block start-->
+            <div class="sidebar_widget newsletter mb-30">
+                <div class="block_title">
+                    <h3>newsletter</h3>
+                </div>
+                <form action="#">
+                    <p>Sign up for your newsletter</p>
+                    <input placeholder="Your email address" type="text">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <!--newsletter block end-->
+            <!--special product start-->
+            <div class="sidebar_widget special">
+                <div class="block_title">
+                    <h3>Special Products</h3>
+                </div>
+                <div class="special_product_inner mb-20">
+                    <div class="special_p_thumb">
+                        <a href="#"><img src="assets\img\cart\cart3.jpg" alt=""></a>
+                    </div>
+                    <div class="small_p_desc">
+                        <div class="product_ratting">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                            </ul>
+                        </div>
+                        <h3><a href="#">Lorem ipsum dolor</a></h3>
+                        <div class="special_product_proce">
+                            <span class="old_price">$124.58</span>
+                            <span class="new_price">$118.35</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="special_product_inner">
+                    <div class="special_p_thumb">
+                        <a href="#"><img src="assets\img\cart\cart18.jpg" alt=""></a>
+                    </div>
+                    <div class="small_p_desc">
+                        <div class="product_ratting">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                            </ul>
+                        </div>
+                        <h3><a href="#">Printed Summer</a></h3>
+                        <div class="special_product_proce">
+                            <span class="old_price">$124.58</span>
+                            <span class="new_price">$118.35</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--special product end-->
+
+
+        </div>
+
+        @*sản phẩm ở đây*@
+        <div class="col-lg-9 col-md-12">
+            <!--banner slider start-->
+            <div class="banner_slider mb-35">
+                <img src="~/Content/assets\img\banner\14.3_Banner-camp.jpg" alt="">
+            </div>
+            <!--banner slider start-->
+            <!--shop toolbar start-->
+            <div class="shop_toolbar list_toolbar mb-35">
+                <div class="list_button">
+                    <ul class="nav" role="tablist">
+                        <li>
+                            <a class="active" data-toggle="tab" href="#large" role="tab" aria-controls="large" aria-selected="true"><i class="fa fa-th-large"></i></a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false"><i class="fa fa-th-list"></i></a>
+                        </li>
+                    </ul>
+                </div>
+
+                @*<div class="page_amount">
+                        <p>Hiển thị từ trang 1 – @Model.PageCount trên @Model.TotalItemCount kết quả</p>
+                    </div>*@
+
+                <div class="select_option">
+                    <form action="~/Home/TrangSanPhamPhanLoai" method="get">
+
+                        <ul class="nav" role="tablist">
+                            <li>
+                                @*<label>Chọn loại sản phẩm</label>*@
+                                <select name="loaiSP">
+                                    <option value="">Chọn theo loại</option>
+                                    @foreach (var item in db.TheLoaiSPs.ToList())
+                                    {
+                                        <option value="@item.ID" @Html.Raw(item.ID == ViewBag.loaiSP ? "selected" : "")>@item.TenLoaiSP</option>
+                                    }
+                                </select>
+                            </li>
+                            <li>
+                                @* <label>Chọn theo giá</label>*@
+                                <select name="giaTien" id="short">
+                                    <option value="">Chọn theo giá tiền</option>
+                                    <option value="10-100" @(ViewBag.giaTien == "10-100" ? "selected" : "")>10k đến 100k</option>
+                                    <option value="100-500" @(ViewBag.giaTien == "100-500" ? "selected" : "")>100k đến 500k</option>
+                                    <option value="500-1000" @(ViewBag.giaTien == "500-1000" ? "selected" : "")>500k đến 1 Triệu</option>
+                                    <option value="1000-5000" @(ViewBag.giaTien == "1000-5000" ? "selected" : "")>1 Triệu đến 5 Triệu</option>
+                                    <option value="5000-90000" @(ViewBag.giaTien == "5000-90000" ? "selected" : "")>5 Triệu đổ lên</option>
+                                </select>
+                            </li>
+                            <li><button type="submit" class="btn btn-success" style="margin-left: 10px; cursor:pointer;">Xem Sản Phẩm</button></li>
+                        </ul>
+
+
+                    </form>
+                </div>
+
+            </div>
+            <!--shop toolbar end-->
+            <!--shop tab product-->
+            @Html.Partial("~/Views/Home/TrangSanPhamPartialView.cshtml", Model)
+            <!--shop tab product end-->
+            <!--pagination style start-->
+            <div class="pagination_style">
+                <div class="item_page">
+                    <span style="margin-top: 10px; color: mediumpurple; font-weight: bold; font-size: 20px">
+                        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                    </span>
+                </div>
+
+                <div class="page_amount item_page" style="position: relative; top: 10px">
+                    <p>Hiển thị từ trang 1 – @Model.PageCount trên @Model.TotalItemCount kết quả</p>
+                </div>
+
+                @* tao lien ket cac trang *@
+
+                <div class="page_number">
+                    <span>Pages: </span>
+                    <ul>
+                        <li class="current_number @(Model.PageNumber == 1 ? "disabled" : "")">
+                            <a href="@Url.Action("TrangSanPham", new { page = Model.PageNumber - 1 })" tabindex="-1">«</a>
+                        </li>
+
+                        @for (int i = 1; i <= Model.PageCount; i++)
+                        {
+                            <li class="current_number @(Model.PageNumber == i ? "active" : "")">
+                                <a href="@Url.Action("TrangSanPham", new { page = i })">@i <span class="sr-only">(current)</span></a>
+                            </li>
+                        }
+
+                        <li class="current_number @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
+                            <a href="@Url.Action("TrangSanPham", new { page = Model.PageNumber + 1 })">»</a>
+                        </li>
+                    </ul>
+                </div>
+                @* end tao lien ket cac trang *@
+
+            </div>
+            <!--pagination style end-->
+        </div>
+    </div>
+</div>
+<!--pos home section end-->

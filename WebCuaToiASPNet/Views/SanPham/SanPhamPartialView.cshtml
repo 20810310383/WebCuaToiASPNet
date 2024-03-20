@@ -1,0 +1,43 @@
+﻿@using WebCuaToiASPNet.Models;
+@model IEnumerable<SanPham>
+
+
+@foreach (var item in Model)
+{
+    <div class="col-lg-3">
+        <div class="single_product">
+            <div class="product_thumb">
+                <a href="~/ChiTietSanPham/ChiTietSanPham?id=@item.ID">
+                    <img src="@item.Image1" alt="">
+                </a>                
+                    @{
+                        if (item.New_Hot == "New")
+                        {
+                            <div class="img_icone">
+                                <img src="~/Content/assets/img/cart/span-new.png" alt="">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="hot_img">
+                                <img src="~/Content/assets/img/cart/span-hot.png" alt="">
+                            </div>                            
+                        }
+                    }
+                <div class="product_action">
+                    <a href="#"> <i class="fa fa-shopping-cart"></i> Add to cart</a>
+                </div>
+            </div>
+            <div class="product_content">
+                <span class="product_price">@item.GiaBan.Value.ToString("#,##") VNĐ</span>
+                <h3 class="product_title"><a href="single-product.html">@item.TenSP</a></h3>
+            </div>
+            <div class="product_info">
+                <ul>
+                    <li><a href="#" title=" Add to Wishlist ">Add to Wishlist</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Quick view">View Detail</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}

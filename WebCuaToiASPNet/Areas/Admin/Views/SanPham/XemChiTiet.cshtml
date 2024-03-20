@@ -1,0 +1,87 @@
+﻿@model WebCuaToiASPNet.Models.SanPham
+
+@{
+    ViewBag.Title = "Xem chi tiết";
+    Layout = "~/Areas/Admin/Views/Shared/_pageAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    <p>
+        @* @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |*@
+        <a href="~/Admin/SanPham/DanhSach" class="btn btn-dark">Back to list</a>
+    </p>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Thông tin chi tiết sản phẩm <span style="color: blue;">@Html.DisplayFor(model => model.TenSP)</span></h1>
+    </div>
+    <div class="row">
+        <table class="table table-hover">
+            <tr>
+                <td>Tên sản phẩm </td>
+                <td>@Html.DisplayFor(model => model.TenSP)</td>
+            </tr>
+
+            <tr>
+                <td>Giá bán </td>
+                <td>
+                    @*@Html.DisplayFor(model => model.GiaBan)*@
+                    @string.Format("{0:#,0}", Model.GiaBan) VNĐ
+                </td>
+            </tr>
+            <tr>
+                <td>Giá cũ </td>
+                <td>@string.Format("{0:#,0}", Model.GiaCu) VNĐ</td>
+            </tr>
+            <tr>
+                <td>Tên loại sản phẩm</td>
+                <td>@Html.DisplayFor(model => model.TheLoaiSP.TenLoaiSP)</td>
+            </tr>
+            <tr>
+                <td>New / Hot</td>
+                <td>@Html.DisplayFor(model => model.New_Hot)</td>
+            </tr>
+            <tr>
+                <td>Mới / Nổi Bật </td>
+                <td>@Html.DisplayFor(model => model.SpMoi_NoiBat)</td>
+            </tr>
+            <tr>
+                <td>Số lượng tồn </td>
+                <td>@Html.DisplayFor(model => model.SoLuongTon)</td>
+            </tr>
+            <tr>
+                <td>Số lượng bán </td>
+                <td>@Html.DisplayFor(model => model.SoLuongBan)</td>
+            </tr>
+            <tr>
+                <td>Số lượt đánh giá </td>
+                <td>@Html.DisplayFor(model => model.SoLuotDanhGia)</td>
+            </tr>
+            <tr>
+                <td>Hình ảnh 1 </td>
+                <td><img width="150" height="150" src="@Model.Image1" /></td>
+            </tr>
+            <tr>
+                <td>Hình ảnh 2 </td>
+                <td><img width="150" height="150" src="@Model.Image2" /></td>
+            </tr>
+            <tr>
+                <td>Hình ảnh 3 </td>
+                <td><img width="150" height="150" src="@Model.Image3" /></td>
+            </tr>
+            <tr>
+                <td>Mô tả</td>
+                <td>@Html.Raw(Model.Mota)</td>
+            </tr>
+        </table>        
+    </div>
+</div>
+
+
+
+
+@section scriptcss {
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+}
+

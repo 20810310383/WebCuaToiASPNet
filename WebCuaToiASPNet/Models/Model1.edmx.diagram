@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c9f84b039145447a8f29bb3dbf4aef95" Name="Diagram1">
+        <EntityTypeShape EntityType="WebCuaTuASPDotNetModel.ChucNang" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebCuaTuASPDotNetModel.NhanVien" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebCuaTuASPDotNetModel.PhanQuyen" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="WebCuaTuASPDotNetModel.FK_PhanQuyen_ChucNang" ManuallyRouted="false" />
+        <AssociationConnector Association="WebCuaTuASPDotNetModel.FK_PhanQuyen_NhanVien" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WebCuaTuASPDotNetModel.ChiTietDonDatHang" Width="1.5" PointX="10.125" PointY="6" />
+        <EntityTypeShape EntityType="WebCuaTuASPDotNetModel.DonDatHang" Width="1.5" PointX="7.875" PointY="0.75" />
+        <EntityTypeShape EntityType="WebCuaTuASPDotNetModel.KhachHang" Width="1.5" PointX="5.625" PointY="1.5" />
+        <EntityTypeShape EntityType="WebCuaTuASPDotNetModel.LoaiCuaTheLoaiSP" Width="1.5" PointX="3.375" PointY="6.125" />
+        <EntityTypeShape EntityType="WebCuaTuASPDotNetModel.TheLoaiSP" Width="1.5" PointX="5.625" PointY="6" />
+        <AssociationConnector Association="WebCuaTuASPDotNetModel.FK_ChiTietDonDatHang_DonDatHang" />
+        <AssociationConnector Association="WebCuaTuASPDotNetModel.FK_DonDatHang_KhachHang" />
+        <AssociationConnector Association="WebCuaTuASPDotNetModel.FK_TheLoaiSP_LoaiCuaTheLoaiSP" />
+        <EntityTypeShape EntityType="WebCuaTuASPDotNetModel.SanPham" Width="1.5" PointX="7.875" PointY="5" />
+        <AssociationConnector Association="WebCuaTuASPDotNetModel.FK_ChiTietDonDatHang_SanPham" />
+        <AssociationConnector Association="WebCuaTuASPDotNetModel.FK_SanPham_TheLoaiSP" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
